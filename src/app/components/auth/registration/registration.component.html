@@ -1,1 +1,21 @@
-<p>registration works!</p>
+<section>
+    <form [formGroup]="registrationFormGroup" (ngSubmit)="form.valid && signUp()" #form="ngForm">
+        <div>
+            <label for="email">Email</label>
+            <input type="email" formControlName="email" name="email" id="email"> 
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="password" formControlName="password" name="password" id="password"> 
+        </div>
+        <div>
+            <label for="firstName">First Name <span>(optional)</span></label>
+            <input type="firstName" formControlName="firstName" name="firstName" id="firstName"> 
+        </div>
+        <div>
+            <label for="lastName">Last Name <span>(optional)</span></label>
+            <input type="lastName" formControlName="lastName" name="lastName" id="lastName"> 
+        </div>
+        <button type="submit" [disabled]="!form.valid">Sign up</button>
+    </form>
+</section>

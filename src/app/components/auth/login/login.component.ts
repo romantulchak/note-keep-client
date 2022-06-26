@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SignInRequest } from 'src/app/requests/auth/sign-in.request';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -10,19 +12,32 @@ export class LoginComponent implements OnInit {
 
   public loginFrogGroup: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
     this.initLoginForm();
   }
 
   /**
+   * Authenticate user by its email and password
+   */
+  public signIn(): void{
+    const signInRequest = this.loginFrogGroup.value as SignInRequest;
+    this.authService.signIn(signInRequest).subscribe(
+      res => {
+        console.log('JWT', res);
+      }
+    )
+  }
+
+  /**
    * Initialize login form group
    */
   private initLoginForm(): void{
-    this.loginFrogGroup = this.fb.group({
-      email: ['', Validators.required, Validators.min(4), Validators.max(85)],
-      password: ['', Validators.required, Validators.min(4), Validators.max(60)]
+    this.loginFrogGroup = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(85)]],
+      password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(60)]]
     });
   }
 
