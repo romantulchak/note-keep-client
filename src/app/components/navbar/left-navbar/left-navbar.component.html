@@ -1,0 +1,35 @@
+<nav [ngClass]="isNavbarOpened ? 'left__navbar_opened' : 'left__navbar_closed'">
+  <ul class="nav__list">
+    <li>
+      <div class="link" role="button" routerLink="/" routerLinkActive="active"
+           [routerLinkActiveOptions]="{ exact: false }">
+        <img src="assets/icons/note.svg" alt="Notes">
+        <h3 class="title">Notes</h3>
+      </div>
+    </li>
+    <li>
+      <div class="link" role="button" routerLink="/reminders" routerLinkActive="active">
+        <img src="assets/icons/reminder.svg" alt="Reminders">
+        <h3 class="title">Reminders</h3>
+      </div>
+    </li>
+    <li>
+      <div class="link" role="button" routerLink="/edit-labels" routerLinkActive="active">
+        <img src="assets/icons/edit.svg" alt="Edit labels">
+        <h3 class="title">Edit labels</h3>
+      </div>
+    </li>
+    <li>
+      <div class="link" role="button" routerLink="/archive" routerLinkActive="active">
+        <img src="assets/icons/archive.svg" alt="Archive">
+        <h3 class="title">Archive</h3>
+      </div>
+    </li>
+    <li>
+      <div class="link" role="button" routerLink="/bin" routerLinkActive="active">
+        <img src="assets/icons/bin.svg" alt="Bin">
+        <h3 class="title">Bin</h3>
+      </div>
+    </li>
+  </ul>
+</nav>

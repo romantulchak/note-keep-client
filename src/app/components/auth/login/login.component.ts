@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SignInRequest } from 'src/app/requests/auth/sign-in.request';
-import { AuthService } from 'src/app/services/auth.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {SignInRequest} from 'src/app/requests/auth/sign-in.request';
+import {AuthService} from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     const signInRequest = this.loginFrogGroup.value as SignInRequest;
     this.authService.signIn(signInRequest).subscribe(
       res => {
-        console.log('JWT', res);
+        this.authService.saveToken(res.jwt);
       }
     )
   }

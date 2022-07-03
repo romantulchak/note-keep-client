@@ -1,0 +1,28 @@
+<header class="top__header">
+  <nav class="top__navbar">
+    <div class="image__title_block">
+      <img src="assets/icons/menu.svg" alt="keep-note-menu-icon" (click)="toggleNavbar()">
+      <h1 class="title">{{title}}</h1>
+    </div>
+    <div class="search">
+      <div class="search__block" [class.search__select]="isSearchSelected">
+        <div class="search__icon">
+          <img src="assets/icons/search.svg" alt="search-notes">
+        </div>
+        <div class="input__search">
+          <form [formGroup]="searchFormGroup">
+            <input type="text" name="search" formControlName="value" autocomplete="off" placeholder="Search"
+                   (focus)="searchSelect()" (blur)="searchUnselect()">
+          </form>
+        </div>
+        <div class="close__icon" *ngIf="isSearchSelected">
+          <img src="assets/icons/close.svg" alt="close-search">
+        </div>
+      </div>
+    </div>
+    <ul class="settings">
+      <li><img src="assets/icons/grid.svg" alt="Grid layout"></li>
+      <li><img src="assets/icons/settings.svg" alt="Settings"></li>
+    </ul>
+  </nav>
+</header>

@@ -1,0 +1,61 @@
+@mixin linkAnimation($border-left-top, $border-right-top, $border-left-bottom, $border-right-bottom, $duration, $delay) {
+  border-radius: $border-left-top $border-right-top $border-right-bottom $border-left-bottom;
+  transition: $duration ease-in $delay;
+}
+
+%leftNavbar {
+  transition: .2s linear;
+  white-space: nowrap;
+}
+
+.left__navbar_opened {
+  @extend %leftNavbar;
+  width: 250px;
+  height: calc(100vh - 74px);
+
+  .link {
+    @include linkAnimation(0, 50px, 0, 50px, .1s, 0);
+    padding-left: 2em;
+  }
+}
+
+.left__navbar_closed {
+  @extend %leftNavbar;
+  overflow: hidden;
+  width: 55px;
+  padding-left: 20px;
+
+  .link {
+    @include linkAnimation(50px, 50px, 50px, 50px, .1s, .1s);
+  }
+}
+
+.nav__list {
+  margin-top: 10px;
+
+  .active {
+    background: #feefc3;
+  }
+
+  .link {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    height: 48px;
+    padding-left: 1em;
+    cursor: pointer;
+
+    &:not(.active) {
+      &:hover {
+        background-color: #f1f3f4;
+      }
+    }
+
+    .title {
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 600;
+      color: #202124;
+      font-size: .875rem;
+    }
+  }
+}

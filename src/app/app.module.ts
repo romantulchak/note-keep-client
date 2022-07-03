@@ -1,18 +1,25 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { LoginComponent } from './components/auth/login/login.component';
-import { RegistrationComponent } from './components/auth/registration/registration.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {LoginComponent} from './components/auth/login/login.component';
+import {RegistrationComponent} from './components/auth/registration/registration.component';
+import {MainComponent} from './components/main/main.component';
+import {AuthInterceptor} from "./services/auth.interceptor";
+import {TopNavbarComponent} from './components/navbar/top-navbar/top-navbar.component';
+import {LeftNavbarComponent} from './components/navbar/left-navbar/left-navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    MainComponent,
+    TopNavbarComponent,
+    LeftNavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +28,11 @@ import { RegistrationComponent } from './components/auth/registration/registrati
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
