@@ -11,6 +11,7 @@ import {MainComponent} from './components/main/main.component';
 import {AuthInterceptor} from "./services/auth.interceptor";
 import {TopNavbarComponent} from './components/navbar/top-navbar/top-navbar.component';
 import {LeftNavbarComponent} from './components/navbar/left-navbar/left-navbar.component';
+import {NotesComponent} from './components/main/notes/notes.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {LeftNavbarComponent} from './components/navbar/left-navbar/left-navbar.c
     RegistrationComponent,
     MainComponent,
     TopNavbarComponent,
-    LeftNavbarComponent
+    LeftNavbarComponent,
+    NotesComponent
   ],
   imports: [
     BrowserModule,

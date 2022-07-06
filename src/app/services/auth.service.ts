@@ -35,7 +35,8 @@ export class AuthService {
   /**
    * Get user token from local storage
    */
-  public getToken(): string {
-    return JSON.stringify(localStorage.getItem('token'));
+  public getToken(): string | null {
+    const token = localStorage.getItem('token');
+    return token !== null ? token : null;
   }
 }

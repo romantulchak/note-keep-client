@@ -4,6 +4,7 @@ import {LoginComponent} from './components/auth/login/login.component';
 import {RegistrationComponent} from './components/auth/registration/registration.component';
 import {AuthGuard} from "./guards/auth.guard";
 import {MainComponent} from "./components/main/main.component";
+import {NotesComponent} from "./components/main/notes/notes.component";
 
 const routes: Routes = [
   {
@@ -13,7 +14,11 @@ const routes: Routes = [
       {path: 'registration', component: RegistrationComponent}
     ]
   },
-  {path: '', component: MainComponent}
+  {
+    path: '', component: MainComponent, children: [
+      {path: 'notes', component: NotesComponent}
+    ]
+  }
 ];
 
 @NgModule({

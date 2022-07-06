@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {SignInRequest} from 'src/app/requests/auth/sign-in.request';
 import {AuthService} from 'src/app/services/auth.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,9 @@ export class LoginComponent implements OnInit {
   public loginFrogGroup: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private router: Router) {
+  }
 
   ngOnInit(): void {
     this.initLoginForm();
@@ -27,6 +30,7 @@ export class LoginComponent implements OnInit {
     this.authService.signIn(signInRequest).subscribe(
       res => {
         this.authService.saveToken(res.jwt);
+        this.router.navigateByUrl("/").then();
       }
     )
   }

@@ -1,0 +1,12 @@
+@mixin gridWidth($leftNavbarWidth) {
+  display: grid;
+  grid-template-columns: $leftNavbarWidth 1fr;
+}
+
+.content__with_opened_nav {
+  @include gridWidth(250px);
+}
+
+.content__with_closed_nav {
+  @include gridWidth(100px);
+}

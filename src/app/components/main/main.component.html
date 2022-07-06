@@ -2,7 +2,12 @@
   <div>
     <app-top-navbar></app-top-navbar>
   </div>
-  <div>
-    <app-left-navbar></app-left-navbar>
+  <div [ngClass]="isNavbarOpened ? 'content__with_opened_nav' : 'content__with_closed_nav'">
+    <div>
+      <app-left-navbar></app-left-navbar>
+    </div>
+    <div>
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </main>
