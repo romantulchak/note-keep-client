@@ -1,0 +1,24 @@
+<div>
+    <form [formGroup]="createNoteFormGroup" class="create__note_form">
+        <div *ngIf="isNoteCreatingFocus">
+            <input type="text" placeholder="Title" formControlName="title">
+        </div>
+        <div class="title__action_list" role="textbox">
+            <div class="text__block">
+              <div class="text__input" #textbox contenteditable="true" (focus)="setNoteCreationOnFocus()" (input)="setTextForNote($event)" placeholder="Note..."></div>
+            </div>
+            <div class="icons" *ngIf="!isNoteCreatingFocus">
+                <div class="icon">
+                    <img src="assets/icons/checkbox.svg" alt="list">
+                </div>
+                <div class="icon">
+                    <img src="assets/icons/pencil.svg" alt="pencil">
+                </div>
+                <div class="icon">
+                    <img src="assets/icons/image.svg" alt="image">
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
