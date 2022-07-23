@@ -1,14 +1,54 @@
+%editableTextblock {
+  width: 100%;
+
+  .text__input {
+    width: 100%;
+    height: auto;
+    resize: none;
+    pointer-events: all;
+    line-height: 1.4;
+
+    &[contenteditable=true]:empty:before {
+      content: attr(placeholder);
+      font-size: 16px;
+    }
+  }
+}
+
 .create__note_form {
   width: 600px;
   margin: 3em auto;
   box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
   padding: .8em;
   border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  font-family: "Open Sans", sans-serif;
+
+  .title__block {
+    @extend %editableTextblock;
+    position: relative;
+    margin-bottom: 1em;
+    font-weight: 600;
+    color: rgba(0,0,0,0.6);
+
+    .text__util{
+      width: 32px;
+      height: 32px;
+      float: right;
+    }
+
+    .clip__block{
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
 
   .title__action_list {
     display: flex;
     align-items: center;
     height: 100%;
+
 
     .icons {
       display: flex;
@@ -17,17 +57,40 @@
     }
 
     .text__block {
-      width: 100%;
+      @extend %editableTextblock;
+      font-size: 14px;
+    }
+  }
 
-      .text__input {
-        width: 100%;
-        height: auto;
-        resize: none;
-        pointer-events: all;
+  .tool__panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1em;
 
-        &[contenteditable=true]:empty:before{
-            content:attr(placeholder);
-          }
+    .icons {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      align-items: center;
+      flex: 0 1 70%;
+
+      .icon {
+        width: 32px;
+        display: flex;
+        height: 32px;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+          background: rgba(95, 99, 104, 0.157);
+          border-radius: 50px;
+        }
+
+        img {
+          width: 18px;
+          height: 18px;
+        }
       }
     }
   }
