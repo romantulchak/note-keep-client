@@ -1,0 +1,51 @@
+%backgoundsGrid {
+  display: flex;
+  gap: 5px;
+  padding: 8px;
+  justify-content: center;
+}
+
+@mixin itemStyle($width, $height) {
+  width: $width;
+  height: $height;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.background__block {
+  box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+  box-sizing: border-box;
+  border-radius: 8px;
+
+  .colors {
+    @extend %backgoundsGrid;
+
+    .item {
+      @include itemStyle(32px, 32px);
+    }
+  }
+
+  .backgrounds {
+    @extend %backgoundsGrid;
+
+    .item {
+      @include itemStyle(40px, 40px);
+
+    }
+
+  }
+
+  hr {
+    border: none;
+    height: 1px;
+    background: #dadce0;
+  }
+
+}
+
+.item_default {
+  border: 1px solid #a142f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

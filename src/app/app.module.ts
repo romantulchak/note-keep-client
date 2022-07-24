@@ -13,6 +13,7 @@ import {TopNavbarComponent} from './components/navbar/top-navbar/top-navbar.comp
 import {LeftNavbarComponent} from './components/navbar/left-navbar/left-navbar.component';
 import {NotesComponent} from './components/main/notes/notes.component';
 import { CreateNoteComponent } from './components/main/notes/create-note/create-note.component';
+import { NoteBackgroundPickerComponent } from './components/main/notes/note-background-picker/note-background-picker.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { CreateNoteComponent } from './components/main/notes/create-note/create-
     TopNavbarComponent,
     LeftNavbarComponent,
     NotesComponent,
-    CreateNoteComponent
+    CreateNoteComponent,
+    NoteBackgroundPickerComponent
   ],
   imports: [
     BrowserModule,

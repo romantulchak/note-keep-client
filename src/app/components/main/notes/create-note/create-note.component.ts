@@ -1,7 +1,9 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { Component, ComponentFactoryResolver, ComponentRef, ElementRef, HostListener, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BackgroundDTO } from 'src/app/dto/backgorund.dto';
+import { NoteBackgroundDTO } from 'src/app/dto/note-background.dto';
 import { NoteService } from 'src/app/services/note.service';
+import { NoteBackgroundPickerComponent } from '../note-background-picker/note-background-picker.component';
 
 @Component({
   selector: 'app-create-note',
@@ -13,13 +15,17 @@ export class CreateNoteComponent implements OnInit {
   public isNoteCreatingFocus: boolean;
   public createNoteFormGroup: FormGroup;
   public backgrounds: BackgroundDTO;
+  public selectedBackgroundColor: NoteBackgroundDTO | null;
+  public selectedBackgroundImage: NoteBackgroundDTO | null;
   
   @ViewChild('textbox') textBox: ElementRef;
   @ViewChild('titlebox') titleBox: ElementRef;
+  @ViewChild('backgrounds', {read: ViewContainerRef}) container: ViewContainerRef;
 
   constructor(private elementRef: ElementRef,
               private fb: FormBuilder,
-              private noteService: NoteService) { }
+              private noteService: NoteService,
+              private componentFactoryResolver : ComponentFactoryResolver) { }
 
   ngOnInit(): void {
     this.initNoteFormGroup();
@@ -64,12 +70,57 @@ export class CreateNoteComponent implements OnInit {
     if (!this.backgrounds) {
       this.noteService.getBackgrounds().subscribe(
         res => {
-          console.log(res);
           this.backgrounds = res;
+          this.createBackgroundPickerComponent();
         }
       );  
+    } else { 
+      this.createBackgroundPickerComponent();
     }
   }
+
+  /**
+   * Creates background picker component
+   */
+  private createBackgroundPickerComponent(): void {
+    this.container.clear();
+    const factory = this.componentFactoryResolver.resolveComponentFactory(NoteBackgroundPickerComponent);
+    const componentRef = this.container.createComponent(factory);
+    componentRef.instance.backgorund = this.backgrounds;
+    this.handleSelectedBackroundColor(componentRef);
+    this.handleSelectedBackroundImage(componentRef);
+    
+  }
+
+  /**
+   * Handle selected value from {@link NoteBackgroundPickerComponent}
+   * and sets it into form group for backgroundColor field
+   * 
+   * @param componentRef to get @Output from compoennt
+   */
+  private handleSelectedBackroundColor(componentRef: ComponentRef<NoteBackgroundPickerComponent>): void {
+    componentRef.instance.backgorundColor.subscribe(
+      res => {
+        this.selectedBackgroundColor = res;
+        this.createNoteFormGroup.get('backgroundColor')?.setValue(res.name);
+      }
+    );
+  }
+
+  /**
+   * Handle selected value from {@link NoteBackgroundPickerComponent}
+   * and sets it into form group for backgroundImage field
+   * 
+   * @param componentRef to get @Output from compoennt
+   */
+     private handleSelectedBackroundImage(componentRef: ComponentRef<NoteBackgroundPickerComponent>): void {
+      componentRef.instance.backgorundImage.subscribe(
+        res => {          
+          this.selectedBackgroundImage = res;
+        this.createNoteFormGroup.get('backgroundImage')?.setValue(res.name);
+        }
+      );
+    }
 
   /**
    * Sends request to server to create note
@@ -77,6 +128,8 @@ export class CreateNoteComponent implements OnInit {
   private createNote(): void {
     this.textBox.nativeElement.innerHTML = ''
     this.titleBox.nativeElement.innerHTML = '';
+    this.selectedBackgroundColor = null;
+    this.selectedBackgroundImage = null;
     this.createNoteFormGroup.reset();
   }
 

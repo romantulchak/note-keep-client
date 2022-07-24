@@ -19,28 +19,37 @@
   width: 600px;
   margin: 3em auto;
   box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
-  padding: .8em;
   border-radius: 12px;
   border: 1px solid #e0e0e0;
   font-family: "Open Sans", sans-serif;
+  transition: .3s ease-in-out;
 
-  .title__block {
-    @extend %editableTextblock;
-    position: relative;
-    margin-bottom: 1em;
-    font-weight: 600;
-    color: rgba(0,0,0,0.6);
+  .title__text_panel {
+    padding: .8em;
+    height: 100%;
+    border-radius: 12px 12px 0 0;
+    background-position-x: right;
+    background-position-y: bottom;
+    background-size: cover;
 
-    .text__util{
-      width: 32px;
-      height: 32px;
-      float: right;
-    }
-
-    .clip__block{
-      position: absolute;
-      top: 0;
-      right: 0;
+    .title__block {
+      @extend %editableTextblock;
+      position: relative;
+      margin-bottom: 1em;
+      font-weight: 600;
+      color: rgba(0,0,0,0.6);
+  
+      .text__util{
+        width: 32px;
+        height: 32px;
+        float: right;
+      }
+  
+      .clip__block{
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
     }
   }
 
@@ -48,7 +57,7 @@
     display: flex;
     align-items: center;
     height: 100%;
-
+    
 
     .icons {
       display: flex;
@@ -66,7 +75,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 1em;
+    position: relative;
+    padding: 0 0.8em 0.8em 0.8em;
 
     .icons {
       display: grid;
@@ -93,5 +103,12 @@
         }
       }
     }
+  }
+
+  .background__picker{
+    position: absolute;
+    top: 30px;
+    background: #fff;
+    left: 85px;
   }
 }

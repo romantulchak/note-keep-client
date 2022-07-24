@@ -1,20 +1,12 @@
 export class NoteBackgroundDTO {
-  private _name: string;
-  private _value: string;
+  public name: string;
+  public value: string;
+  public fullPathToImage: string;
 
-  get name(): string {
-    return this._name;
+  constructor(name: string = 'default', value: string = '', fullPathToImage: string = ''){
+    this.name = name;
+    this.value = value;
+    this.fullPathToImage = this.fullPathToImage;
   }
 
-  set name(value: string) {
-    this._name = value;
-  }
-
-  get value(): string {
-    return this._value;
-  }
-
-  set value(value: string) {
-    this._value = value;
-  }
 }
