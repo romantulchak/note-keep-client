@@ -5,8 +5,9 @@
         <div class="text__util"></div>
         <div class="text__input" #titlebox contenteditable="true" (focus)="setNoteCreationOnFocus()"
           (input)="setTextForNote($event, 'title')" placeholder="Title"></div>
-        <div class="clip__block">
-          <img src="assets/icons/clip.svg" alt="Clip">
+        <div class="clip__block" (click)="setMarked()">
+          <img *ngIf="!createNoteFormGroup.get('isMarked')?.value" src="assets/icons/clip.svg" alt="Clip">
+          <img *ngIf="createNoteFormGroup.get('isMarked')?.value" src="assets/icons/clip-filled.svg" alt="Clip">
         </div>
       </div>
       <div class="title__action_list" role="textbox">

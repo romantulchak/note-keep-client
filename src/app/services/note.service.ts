@@ -4,6 +4,7 @@ import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
 import {NoteDTO} from "../dto/note.dto";
 import { BackgroundDTO } from "../dto/backgorund.dto";
+import { CreateNoteRequest } from "../request/create-note.request";
 
 const API_URL = `${environment.apiUrl}/note`;
 
@@ -31,5 +32,15 @@ export class NoteService {
    */
   public getBackgrounds(): Observable<BackgroundDTO> {
     return this.http.get<BackgroundDTO>(`${API_URL}/backgrounds`);
+  }
+
+  /**
+   * Creates note by data from form
+   * 
+   * @param createNoteRequest contains information about note which will be created
+   * @returns NoteDTO object 
+  */
+  public create(createNoteRequest: CreateNoteRequest): Observable<NoteDTO> {
+    return this.http.post<NoteDTO>(`${API_URL}/create`, createNoteRequest);
   }
 }

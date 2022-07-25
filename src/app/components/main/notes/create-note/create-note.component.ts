@@ -2,6 +2,7 @@ import { Component, ComponentFactoryResolver, ComponentRef, ElementRef, HostList
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BackgroundDTO } from 'src/app/dto/backgorund.dto';
 import { NoteBackgroundDTO } from 'src/app/dto/note-background.dto';
+import { CreateNoteRequest } from 'src/app/request/create-note.request';
 import { NoteService } from 'src/app/services/note.service';
 import { NoteBackgroundPickerComponent } from '../note-background-picker/note-background-picker.component';
 
@@ -36,6 +37,14 @@ export class CreateNoteComponent implements OnInit {
    */
   public setNoteCreationOnFocus(): void {
     this.isNoteCreatingFocus = true;
+  }
+
+  /**
+   * Togle isMarked attribute in form group
+   */
+  public setMarked(): void {
+    const isMarked = this.createNoteFormGroup.get('isMarked');
+    isMarked?.setValue(!isMarked.value);
   }
   
   /**
@@ -89,7 +98,6 @@ export class CreateNoteComponent implements OnInit {
     componentRef.instance.backgorund = this.backgrounds;
     this.handleSelectedBackroundColor(componentRef);
     this.handleSelectedBackroundImage(componentRef);
-    
   }
 
   /**
@@ -126,6 +134,14 @@ export class CreateNoteComponent implements OnInit {
    * Sends request to server to create note
    */
   private createNote(): void {
+    if(this.createNoteFormGroup.valid){
+      this.noteService.create(this.createNoteFormGroup.value).subscribe(
+        res => {
+          console.log(res);
+          console.log('Note created');
+        }
+      );
+    }
     this.textBox.nativeElement.innerHTML = ''
     this.titleBox.nativeElement.innerHTML = '';
     this.selectedBackgroundColor = null;
