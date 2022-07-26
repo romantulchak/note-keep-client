@@ -98,6 +98,7 @@ export class CreateNoteComponent implements OnInit {
     componentRef.instance.backgorund = this.backgrounds;
     this.handleSelectedBackroundColor(componentRef);
     this.handleSelectedBackroundImage(componentRef);
+    this.handleClickOutsideBackgroundPicker(componentRef);
   }
 
   /**
@@ -125,10 +126,27 @@ export class CreateNoteComponent implements OnInit {
       componentRef.instance.backgorundImage.subscribe(
         res => {          
           this.selectedBackgroundImage = res;
-        this.createNoteFormGroup.get('backgroundImage')?.setValue(res.name);
+          this.createNoteFormGroup.get('backgroundImage')?.setValue(res.name);
         }
       );
     }
+
+  /**
+   * Handle click outside background picker {@link NoteBackgroundPickerComponent}
+   * if true then destroy component 
+   * 
+   * @param componentRef to get @Output from compoennt
+   */
+   private handleClickOutsideBackgroundPicker(componentRef: ComponentRef<NoteBackgroundPickerComponent>): void {
+    componentRef.instance.hidePicker.subscribe(
+      res => {          
+        if(res) {
+          componentRef.destroy();
+        }
+      }
+    );
+  }
+
 
   /**
    * Sends request to server to create note

@@ -14,6 +14,7 @@ import {LeftNavbarComponent} from './components/navbar/left-navbar/left-navbar.c
 import {NotesComponent} from './components/main/notes/notes.component';
 import { CreateNoteComponent } from './components/main/notes/create-note/create-note.component';
 import { NoteBackgroundPickerComponent } from './components/main/notes/note-background-picker/note-background-picker.component';
+import { ClickOutsideDirective } from './directive/click-outside.directive';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { NoteBackgroundPickerComponent } from './components/main/notes/note-back
     LeftNavbarComponent,
     NotesComponent,
     CreateNoteComponent,
-    NoteBackgroundPickerComponent
+    NoteBackgroundPickerComponent,
+    ClickOutsideDirective
   ],
   imports: [
     BrowserModule,
