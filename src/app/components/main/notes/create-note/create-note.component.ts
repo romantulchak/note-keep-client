@@ -155,8 +155,7 @@ export class CreateNoteComponent implements OnInit {
     if(this.createNoteFormGroup.valid){
       this.noteService.create(this.createNoteFormGroup.value).subscribe(
         res => {
-          console.log(res);
-          console.log('Note created');
+          this.noteService.notes.next(res);
         }
       );
     }

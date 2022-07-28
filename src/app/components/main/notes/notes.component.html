@@ -1,3 +1,6 @@
 <section class="notes__section">
-
+    <div *ngFor="let note of notes" class="note">
+        <h4>{{note.title}}</h4>
+        <h3>{{note.text}}</h3>
+    </div>
 </section>

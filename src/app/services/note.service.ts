@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {environment} from "../../environments/environment";
-import {Observable} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import {NoteDTO} from "../dto/note.dto";
 import { BackgroundDTO } from "../dto/backgorund.dto";
 import { CreateNoteRequest } from "../request/create-note.request";
@@ -12,6 +12,8 @@ const API_URL = `${environment.apiUrl}/note`;
   providedIn: 'root'
 })
 export class NoteService {
+  
+  public notes: Subject<NoteDTO> = new Subject();
 
   constructor(private http: HttpClient) {
   }
