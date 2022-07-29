@@ -1,0 +1,40 @@
+.note__tool_panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+
+  .icons {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    align-items: center;
+    flex: 0 1 70%;
+
+    .icon {
+      width: 32px;
+      display: flex;
+      height: 32px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        background: rgba(95, 99, 104, 0.157);
+        border-radius: 50px;
+      }
+
+      img {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+}
+
+.background__picker {
+  position: absolute;
+  top: 30px;
+  background: #fff;
+  left: 85px;
+  z-index: 1;
+}

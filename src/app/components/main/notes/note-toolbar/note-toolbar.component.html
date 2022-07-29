@@ -1,0 +1,30 @@
+<div class="note__tool_panel">
+  <div class="icons">
+    <div class="icon">
+      <img src="assets/icons/ring.svg" alt="Rigning">
+    </div>
+    <div class="icon">
+      <img src="assets/icons/author.svg" alt="Author">
+    </div>
+    <div class="icon" (click)="getBackgrounds()">
+      <img src="assets/icons/background.svg" alt="Background">
+    </div>
+    <div class="icon">
+      <img src="assets/icons/add-image.svg" alt="Add-image">
+    </div>
+    <div class="icon">
+      <img src="assets/icons/archive.svg" alt="Archive">
+    </div>
+    <div class="icon">
+      <img src="assets/icons/more.svg" alt="Rigning">
+    </div>
+    <ng-container *ngIf="showAdditionalActions">
+      <div class="icon">
+        <img src="assets/icons/rollback.svg" alt="Rollback">
+      </div>
+    </ng-container>
+  </div>
+  <div class="background__picker">
+    <template #backgrounds></template>
+  </div>
+</div>

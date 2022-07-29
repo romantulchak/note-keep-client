@@ -38,13 +38,13 @@
       margin-bottom: 1em;
       font-weight: 600;
       color: rgba(0,0,0,0.6);
-  
+
       .text__util{
         width: 32px;
         height: 32px;
         float: right;
       }
-  
+
       .clip__block{
         position: absolute;
         top: 0;
@@ -78,30 +78,8 @@
     position: relative;
     padding: 0.3em 0.8em 0.3em 0.8em;
 
-    .icons {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      align-items: center;
-      flex: 0 1 70%;
-
-      .icon {
-        width: 32px;
-        display: flex;
-        height: 32px;
-        cursor: pointer;
-        align-items: center;
-        justify-content: center;
-
-        &:hover {
-          background: rgba(95, 99, 104, 0.157);
-          border-radius: 50px;
-        }
-
-        img {
-          width: 18px;
-          height: 18px;
-        }
-      }
+    .tools {
+      flex: 1 0;
     }
   }
 

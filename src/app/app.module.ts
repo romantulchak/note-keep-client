@@ -12,8 +12,11 @@ import {AuthInterceptor} from "./services/auth.interceptor";
 import {TopNavbarComponent} from './components/navbar/top-navbar/top-navbar.component';
 import {LeftNavbarComponent} from './components/navbar/left-navbar/left-navbar.component';
 import {NotesComponent} from './components/main/notes/notes.component';
-import { CreateNoteComponent } from './components/main/notes/create-note/create-note.component';
-import { NoteBackgroundPickerComponent } from './components/main/notes/note-background-picker/note-background-picker.component';
+import {CreateNoteComponent} from './components/main/notes/create-note/create-note.component';
+import {
+  NoteBackgroundPickerComponent
+} from './components/main/notes/note-background-picker/note-background-picker.component';
+import {NoteToolbarComponent} from './components/main/notes/note-toolbar/note-toolbar.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,7 @@ import { NoteBackgroundPickerComponent } from './components/main/notes/note-back
     NotesComponent,
     CreateNoteComponent,
     NoteBackgroundPickerComponent,
+    NoteToolbarComponent,
   ],
   imports: [
     BrowserModule,
