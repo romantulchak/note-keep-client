@@ -11,6 +11,8 @@ import {NoteService} from "../../../services/note.service";
 export class NotesComponent implements OnInit {
 
   public notes: NoteDTO[];
+  public isOnFocus: boolean;
+  public currentFocusedNoteId: string | undefined;
 
   constructor(private noteService: NoteService) {
   }
@@ -18,6 +20,46 @@ export class NotesComponent implements OnInit {
   ngOnInit(): void {
     this.getNotes();
     this.getNotesAfterCreate();
+  }
+
+  /**
+   * Handle selected value from {@link NoteBackgroundPickerComponent}
+   * and sets it for Note backgroundImage field
+   *
+   * @param noteBackgroundDTO to get @Output from component
+   * @param note for which background will be set
+   */
+  public handleBackgroundImage(noteBackgroundDTO: NoteBackgroundDTO, note: NoteDTO): void {
+    note.backgroundImage.value = noteBackgroundDTO.fullPathToImage;
+  }
+
+    /**
+   * Handle selected value from {@link NoteBackgroundPickerComponent}
+   * and sets it for Note backgroundColor field
+   *
+   * @param noteBackgroundDTO to get @Output from component
+   * @param note for which background will be set
+   */
+  public handleBackgroundColor(noteBackgroundDTO: NoteBackgroundDTO, note: NoteDTO): void {
+    note.backgroundColor.value = noteBackgroundDTO.value;
+  }
+
+  /**
+   * Set visiibility to visible for hidden elements
+   * 
+   * @param note to show hidden elements for current note
+   */
+  public showHidenElements(note: NoteDTO): void {
+    this.isOnFocus = true;
+    this.currentFocusedNoteId = note.id;
+  }
+
+  /**
+   * Hides additional elements 
+   */
+  public hideElements(): void {
+    this.isOnFocus = false;
+    this.currentFocusedNoteId = undefined;
   }
 
   /**
@@ -43,5 +85,4 @@ export class NotesComponent implements OnInit {
       }
     );
   }
-
 }

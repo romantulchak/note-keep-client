@@ -17,6 +17,8 @@ import {
   NoteBackgroundPickerComponent
 } from './components/main/notes/note-background-picker/note-background-picker.component';
 import {NoteToolbarComponent} from './components/main/notes/note-toolbar/note-toolbar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import {NoteToolbarComponent} from './components/main/notes/note-toolbar/note-to
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatGridListModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
