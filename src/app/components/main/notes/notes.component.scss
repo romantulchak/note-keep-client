@@ -5,12 +5,15 @@
 
   .note {
     width: 240px;
-    min-height: 104px;
     height: max-content;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     box-sizing: border-box;
     display: inline-block;
+    background-position-x: right;
+    background-position-y: bottom;
+    background-size: cover;
+    min-height: 125px;
 
     .note__text_block {
       min-height: 60px;
@@ -41,6 +44,8 @@
   .hidden__elements_block {
     opacity: 0;
     transition: .3s ease-in;
+    box-sizing: border-box;
+    padding: 0.3em;
   }
 
   .show__hidden_elements{

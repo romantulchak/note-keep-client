@@ -37,15 +37,15 @@
       position: relative;
       margin-bottom: 1em;
       font-weight: 600;
-      color: rgba(0,0,0,0.6);
+      color: rgba(0, 0, 0, 0.6);
 
-      .text__util{
+      .text__util {
         width: 32px;
         height: 32px;
         float: right;
       }
 
-      .clip__block{
+      .clip__block {
         position: absolute;
         top: 0;
         right: 0;
@@ -78,12 +78,18 @@
     position: relative;
     padding: 0.3em 0.8em 0.3em 0.8em;
 
+    .close__block {
+      flex: 0 1 35%;
+      display: flex;
+      justify-content: flex-end;
+    }
+
     .tools {
       flex: 1 0;
     }
   }
 
-  .background__picker{
+  .background__picker {
     position: absolute;
     top: 30px;
     background: #fff;

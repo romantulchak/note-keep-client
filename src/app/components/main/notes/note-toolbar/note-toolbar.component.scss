@@ -5,10 +5,10 @@
   position: relative;
 
   .icons {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    display: flex;
     align-items: center;
-    flex: 0 1 70%;
+    flex: 0 1 100%;
+    justify-content: space-between;
 
     .icon {
       width: 32px;

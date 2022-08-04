@@ -1,9 +1,11 @@
 <section class="notes__section">
 
   <div class="notes">
-    <div *ngFor="let note of notes" class="note" [style.background]="note?.backgroundColor?.value"
-      (mouseover)="showHidenElements(note)" (mouseleave)="hideElements()">
-      <div class="note__text_block" [style.background-image]="'url(' + note?.backgroundImage?.value + ')'">
+    <div *ngFor="let note of notes" class="note"
+         [style.background-image]="'url(' + note?.backgroundImage?.fullPathToImage + ')'"
+         [style.background-color]="note.backgroundColor?.value"
+         (mouseover)="showHiddenElements(note)" (mouseleave)="hideElements()">
+      <div class="note__text_block">
         <div class="title">
           <h4>{{note.title}}</h4>
         </div>
@@ -12,8 +14,9 @@
         </div>
       </div>
       <div class="hidden__elements_block" [class.show__hidden_elements]="isOnFocus && currentFocusedNoteId === note.id">
-        <app-note-toolbar [showAdditionalActions]="false" (selectBackgroundImage)="handleBackgroundImage($event, note)"
-          (selectBackgroundColor)="handleBackgroundColor($event, note)"></app-note-toolbar>
+        <app-note-toolbar *ngIf="isOnFocus && currentFocusedNoteId === note.id" [showAdditionalActions]="false"
+                          (selectBackgroundImage)="handleBackgroundImage($event, note)"
+                          (selectBackgroundColor)="handleBackgroundColor($event, note)"></app-note-toolbar>
       </div>
     </div>
   </div>

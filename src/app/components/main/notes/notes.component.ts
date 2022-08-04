@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import { NoteBackgroundDTO } from 'src/app/dto/note-background.dto';
-import { NoteDTO } from 'src/app/dto/note.dto';
+import {NoteBackgroundDTO} from 'src/app/dto/note-background.dto';
+import {NoteDTO} from 'src/app/dto/note.dto';
 import {NoteService} from "../../../services/note.service";
 
 @Component({
@@ -30,7 +30,7 @@ export class NotesComponent implements OnInit {
    * @param note for which background will be set
    */
   public handleBackgroundImage(noteBackgroundDTO: NoteBackgroundDTO, note: NoteDTO): void {
-    note.backgroundImage.value = noteBackgroundDTO.fullPathToImage;
+    note.backgroundImage.fullPathToImage = noteBackgroundDTO.fullPathToImage;
   }
 
     /**
@@ -46,16 +46,16 @@ export class NotesComponent implements OnInit {
 
   /**
    * Set visiibility to visible for hidden elements
-   * 
+   *
    * @param note to show hidden elements for current note
    */
-  public showHidenElements(note: NoteDTO): void {
+  public showHiddenElements(note: NoteDTO): void {
     this.isOnFocus = true;
     this.currentFocusedNoteId = note.id;
   }
 
   /**
-   * Hides additional elements 
+   * Hides additional elements
    */
   public hideElements(): void {
     this.isOnFocus = false;
