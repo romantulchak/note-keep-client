@@ -30,8 +30,8 @@
     </div>
     <div class="tool__panel" *ngIf="isNoteCreatingFocus">
       <div class="tools">
-        <app-note-toolbar (selectBackgroundColor)="handleSelectedBackroundColor($event)"
-                          (selectBackgroundImage)="handleSelectedBackroundImage($event)"></app-note-toolbar>
+        <app-note-toolbar (selectBackgroundColor)="handleSelectedBackgroundColor($event)"
+                          (selectBackgroundImage)="handleSelectedBackgroundImage($event)"></app-note-toolbar>
       </div>
       <div class="close__block">
         <button>Close</button>

@@ -16,7 +16,10 @@
       <div class="hidden__elements_block" [class.show__hidden_elements]="isOnFocus && currentFocusedNoteId === note.id">
         <app-note-toolbar *ngIf="isOnFocus && currentFocusedNoteId === note.id" [showAdditionalActions]="false"
                           (selectBackgroundImage)="handleBackgroundImage($event, note)"
-                          (selectBackgroundColor)="handleBackgroundColor($event, note)"></app-note-toolbar>
+                          (selectBackgroundColor)="handleBackgroundColor($event, note)"
+                          [selectedBackgroundColor]="note.backgroundColor.value"
+                          [selectedBackgroundImage]="note.backgroundImage.name"
+        ></app-note-toolbar>
       </div>
     </div>
   </div>

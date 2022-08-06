@@ -3,8 +3,9 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Observable, Subject} from "rxjs";
 import {NoteDTO} from "../dto/note.dto";
-import { BackgroundDTO } from "../dto/backgorund.dto";
-import { CreateNoteRequest } from "../request/create-note.request";
+import {BackgroundDTO} from "../dto/backgorund.dto";
+import {CreateNoteRequest} from "../request/create-note.request";
+import {ChangeNoteBackgroundRequest} from "../request/change-note-background.request";
 
 const API_URL = `${environment.apiUrl}/note`;
 
@@ -12,7 +13,7 @@ const API_URL = `${environment.apiUrl}/note`;
   providedIn: 'root'
 })
 export class NoteService {
-  
+
   public notes: Subject<NoteDTO> = new Subject();
 
   constructor(private http: HttpClient) {
@@ -29,7 +30,7 @@ export class NoteService {
 
   /**
    * Gets all backgrounds for note (colors and images)
-   * 
+   *
    * @returns backgrounds for note
    */
   public getBackgrounds(): Observable<BackgroundDTO> {
@@ -38,11 +39,21 @@ export class NoteService {
 
   /**
    * Creates note by data from form
-   * 
+   *
    * @param createNoteRequest contains information about note which will be created
-   * @returns NoteDTO object 
-  */
+   * @returns NoteDTO object
+   */
   public create(createNoteRequest: CreateNoteRequest): Observable<NoteDTO> {
     return this.http.post<NoteDTO>(`${API_URL}/create`, createNoteRequest);
   }
+
+  /**
+   * Changes background for note
+   *
+   * @param changeNoteBackgroundRequest contains info about note, background type and background value
+   */
+  public changeBackground(changeNoteBackgroundRequest: ChangeNoteBackgroundRequest): Observable<void> {
+    return this.http.put<void>(`${API_URL}/change-background`, changeNoteBackgroundRequest);
+  }
+
 }

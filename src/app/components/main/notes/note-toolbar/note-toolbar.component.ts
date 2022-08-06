@@ -23,6 +23,8 @@ export class NoteToolbarComponent implements OnInit {
 
   @ViewChild('backgrounds', {read: ViewContainerRef}) container: ViewContainerRef;
   @Input('showAdditionalActions') showAdditionalActions: boolean = true;
+  @Input('selectedBackgroundImage') selectedBackgroundImage: String;
+  @Input('selectedBackgroundColor') selectedBackgroundColor: String;
   @Output('selectBackgroundImage') selectBackgroundImage: EventEmitter<NoteBackgroundDTO> = new EventEmitter();
   @Output('selectBackgroundColor') selectBackgroundColor: EventEmitter<NoteBackgroundDTO> = new EventEmitter();
   private static backgrounds: BackgroundDTO;
@@ -58,9 +60,11 @@ export class NoteToolbarComponent implements OnInit {
     this.container.clear();
     const factory = this.componentFactoryResolver.resolveComponentFactory(NoteBackgroundPickerComponent);
     const componentRef = this.container.createComponent(factory);
-    componentRef.instance.backgorund = NoteToolbarComponent.backgrounds;
-    this.handleSelectedBackroundColor(componentRef);
-    this.handleSelectedBackroundImage(componentRef);
+    componentRef.instance.background = NoteToolbarComponent.backgrounds;
+    componentRef.instance.selectedBackgroundImageName = this.selectedBackgroundImage;
+    componentRef.instance.selectedBackgroundColor = this.selectedBackgroundColor;
+    this.handleSelectedBackgroundColor(componentRef);
+    this.handleSelectedBackgroundImage(componentRef);
     this.handleClickOutsideBackgroundPicker(componentRef);
   }
 
@@ -70,8 +74,8 @@ export class NoteToolbarComponent implements OnInit {
    *
    * @param componentRef to get @Output from compoennt
    */
-  private handleSelectedBackroundColor(componentRef: ComponentRef<NoteBackgroundPickerComponent>): void {
-    componentRef.instance.backgorundColor.subscribe(
+  private handleSelectedBackgroundColor(componentRef: ComponentRef<NoteBackgroundPickerComponent>): void {
+    componentRef.instance.backgroundColor.subscribe(
       res => {
         this.selectBackgroundColor.emit(res);
       }
@@ -84,8 +88,8 @@ export class NoteToolbarComponent implements OnInit {
    *
    * @param componentRef to get @Output from compoennt
    */
-  private handleSelectedBackroundImage(componentRef: ComponentRef<NoteBackgroundPickerComponent>): void {
-    componentRef.instance.backgorundImage.subscribe(
+  private handleSelectedBackgroundImage(componentRef: ComponentRef<NoteBackgroundPickerComponent>): void {
+    componentRef.instance.backgroundImage.subscribe(
       res => {
         this.selectBackgroundImage.emit(res);
       }

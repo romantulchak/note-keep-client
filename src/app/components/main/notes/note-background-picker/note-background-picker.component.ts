@@ -1,6 +1,6 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
-import { BackgroundDTO } from 'src/app/dto/backgorund.dto';
-import { NoteBackgroundDTO } from 'src/app/dto/note-background.dto';
+import {Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output} from '@angular/core';
+import {BackgroundDTO} from 'src/app/dto/backgorund.dto';
+import {NoteBackgroundDTO} from 'src/app/dto/note-background.dto';
 
 @Component({
   selector: 'app-note-background-picker',
@@ -9,40 +9,45 @@ import { NoteBackgroundDTO } from 'src/app/dto/note-background.dto';
 })
 export class NoteBackgroundPickerComponent implements OnInit {
 
-  @Input('backgrounds') backgorund: BackgroundDTO;
-  @Output('color') backgorundColor: EventEmitter<NoteBackgroundDTO> = new EventEmitter();
-  @Output('image') backgorundImage: EventEmitter<NoteBackgroundDTO> = new EventEmitter(); 
+  @Input('backgrounds') background: BackgroundDTO;
+  @Input('selectedBackgroundImage') selectedBackgroundImageName: String;
+  @Input('selectedBackgroundColor') selectedBackgroundColor: String;
+  @Output('color') backgroundColor: EventEmitter<NoteBackgroundDTO> = new EventEmitter();
+  @Output('image') backgroundImage: EventEmitter<NoteBackgroundDTO> = new EventEmitter();
   @Output('hide') hidePicker: EventEmitter<Boolean> = new EventEmitter();
 
-  constructor(private elementRef: ElementRef) { }
+  constructor(private elementRef: ElementRef) {
+  }
 
   ngOnInit(): void {
   }
 
   /**
    * Emit selected background color to parent component
-   * 
-   * @param backgorundColor to be emit to parent component
+   *
+   * @param backgroundColor to be emit to parent component
    */
-  public selectBackgroundColor(backgorundColor: NoteBackgroundDTO = new NoteBackgroundDTO()): void {
-    this.backgorundColor.emit(backgorundColor);
+  public selectBackgroundColor(backgroundColor: NoteBackgroundDTO = new NoteBackgroundDTO()): void {
+    this.backgroundColor.emit(backgroundColor);
+    this.selectedBackgroundColor = backgroundColor.value;
   }
 
-   /**
+  /**
    * Emit selected background image to parent component
-   * 
-   * @param backgorundColor to be emit to parent component
+   *
+   * @param backgroundImage to be emit to parent component
    */
-    public selectBackgroundImage(backgorundImage: NoteBackgroundDTO = new NoteBackgroundDTO()): void {
-      this.backgorundImage.emit(backgorundImage);
-    }
+  public selectBackgroundImage(backgroundImage: NoteBackgroundDTO = new NoteBackgroundDTO()): void {
+    this.backgroundImage.emit(backgroundImage);
+    this.selectedBackgroundImageName = backgroundImage.name;
+  }
 
-    /**
-     * Detects if user click outside background picker 
-     * if yes hide component for selecting backgorunds 
-     * 
-     * @param event to get mouse event
-     */
+  /**
+   * Detects if user click outside background picker
+   * if yes hide component for selecting backgorunds
+   *
+   * @param event to get mouse event
+   */
     @HostListener('document:mousedown', ['$event'])
     public onClickOutsidePicker(event: MouseEvent): void {
       if (!this.elementRef.nativeElement.contains(event.target)) {

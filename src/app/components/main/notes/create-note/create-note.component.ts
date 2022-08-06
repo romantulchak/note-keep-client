@@ -72,7 +72,7 @@ export class CreateNoteComponent implements OnInit {
    *
    * @param noteBackgroundDTO to get @Output from component
    */
-  public handleSelectedBackroundColor(noteBackgroundDTO: NoteBackgroundDTO): void {
+  public handleSelectedBackgroundColor(noteBackgroundDTO: NoteBackgroundDTO): void {
     this.selectedBackgroundColor = noteBackgroundDTO;
     this.createNoteFormGroup.get('backgroundColor')?.setValue(noteBackgroundDTO.name);
   }
@@ -83,7 +83,7 @@ export class CreateNoteComponent implements OnInit {
    *
    * @param noteBackgroundDTO to get @Output from component
    */
-  public handleSelectedBackroundImage(noteBackgroundDTO: NoteBackgroundDTO): void {
+  public handleSelectedBackgroundImage(noteBackgroundDTO: NoteBackgroundDTO): void {
     this.selectedBackgroundImage = noteBackgroundDTO;
     this.createNoteFormGroup.get('backgroundImage')?.setValue(noteBackgroundDTO.name);
   }

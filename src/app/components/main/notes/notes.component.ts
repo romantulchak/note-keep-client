@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NoteBackgroundDTO} from 'src/app/dto/note-background.dto';
 import {NoteDTO} from 'src/app/dto/note.dto';
 import {NoteService} from "../../../services/note.service";
+import {ChangeNoteBackgroundRequest} from "../../../request/change-note-background.request";
 
 @Component({
   selector: 'app-notes',
@@ -31,9 +32,11 @@ export class NotesComponent implements OnInit {
    */
   public handleBackgroundImage(noteBackgroundDTO: NoteBackgroundDTO, note: NoteDTO): void {
     note.backgroundImage.fullPathToImage = noteBackgroundDTO.fullPathToImage;
+    const changeNoteBackgroundRequest = new ChangeNoteBackgroundRequest(note.id, noteBackgroundDTO.name, 'IMAGE');
+    this.changeBackground(changeNoteBackgroundRequest);
   }
 
-    /**
+  /**
    * Handle selected value from {@link NoteBackgroundPickerComponent}
    * and sets it for Note backgroundColor field
    *
@@ -42,10 +45,12 @@ export class NotesComponent implements OnInit {
    */
   public handleBackgroundColor(noteBackgroundDTO: NoteBackgroundDTO, note: NoteDTO): void {
     note.backgroundColor.value = noteBackgroundDTO.value;
+    const changeNoteBackgroundRequest = new ChangeNoteBackgroundRequest(note.id, noteBackgroundDTO.name, 'COLOR');
+    this.changeBackground(changeNoteBackgroundRequest);
   }
 
   /**
-   * Set visiibility to visible for hidden elements
+   * Set visibility to visible for hidden elements
    *
    * @param note to show hidden elements for current note
    */
@@ -79,10 +84,22 @@ export class NotesComponent implements OnInit {
   private getNotesAfterCreate(): void {
     this.noteService.notes.subscribe(
       res => {
-        if(res){
+        if (res) {
           this.notes.push(res);
         }
       }
     );
+  }
+
+  /**
+   * Sends request to server to change note background
+   *
+   * @param changeNoteBackgroundRequest contains info about note and background
+   */
+  private changeBackground(changeNoteBackgroundRequest: ChangeNoteBackgroundRequest): void {
+    this.noteService.changeBackground(changeNoteBackgroundRequest).subscribe(
+      () => {
+        console.log('Changed')
+      });
   }
 }
