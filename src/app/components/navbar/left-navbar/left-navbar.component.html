@@ -13,8 +13,14 @@
         <h3 class="title">Reminders</h3>
       </div>
     </li>
+    <li *ngFor="let label of labels">
+      <div class="link" role="button" routerLinkActive="{{label.name}}">
+        <img src="assets/icons/label.svg" alt="Label {{label.name}}">
+        <h3 class="title">{{label.name}}</h3>
+      </div>
+    </li>
     <li>
-      <div class="link" role="button" routerLink="/edit-labels" routerLinkActive="active">
+      <div class="link" role="button" (click)="showCreateLabelDialog()" routerLinkActive="active">
         <img src="assets/icons/edit.svg" alt="Edit labels">
         <h3 class="title">Edit labels</h3>
       </div>

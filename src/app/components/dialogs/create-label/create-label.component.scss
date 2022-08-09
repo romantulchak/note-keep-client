@@ -1,0 +1,42 @@
+.label__form {
+
+  .label__icons_name {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 35px 1fr 35px;
+    justify-items: center;
+
+    .icon {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      border-radius: 50px;
+      padding: 3px;
+
+      img {
+        width: 100%;
+      }
+
+      &:hover {
+        background-color: rgba(95, 99, 104, 0.157);
+      }
+    }
+
+    .label__name_field {
+      font-size: 13px;
+
+      .mat-form-field-flex {
+        background-color: transparent;
+      }
+
+      .mat-form-field-underline {
+
+        .mat-form-field-ripple {
+          background-color: rgba(0, 0, 0, .2);
+        }
+      }
+    }
+
+
+  }
+}

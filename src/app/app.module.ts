@@ -17,8 +17,11 @@ import {
   NoteBackgroundPickerComponent
 } from './components/main/notes/note-background-picker/note-background-picker.component';
 import {NoteToolbarComponent} from './components/main/notes/note-toolbar/note-toolbar.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {CreateLabelComponent} from './components/dialogs/create-label/create-label.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     CreateNoteComponent,
     NoteBackgroundPickerComponent,
     NoteToolbarComponent,
+    CreateLabelComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,9 @@ import {MatGridListModule} from '@angular/material/grid-list';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDialogModule,
+    MatInputModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

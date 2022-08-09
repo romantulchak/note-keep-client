@@ -1,0 +1,15 @@
+<section class="label_section">
+  <form [formGroup]="labelFormGroup" class="label__form">
+    <div class="label__icons_name">
+      <div class="icon">
+        <img src="assets/icons/close.svg" alt="close">
+      </div>
+      <mat-form-field class="label__name_field" appearance="fill">
+        <input formControlName="name" name="name" min="1" max="50" matInput placeholder="Create label">
+      </mat-form-field>
+      <div class="icon" (click)="createLabel()">
+        <img src="assets/icons/daw.svg" alt="daw">
+      </div>
+    </div>
+  </form>
+</section>

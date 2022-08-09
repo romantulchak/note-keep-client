@@ -10,7 +10,7 @@
 
 .left__navbar_opened {
   @extend %leftNavbar;
-  width: 250px;
+  width: 300px;
   height: calc(100vh - 74px);
 
   .link {
