@@ -39,4 +39,13 @@ export class LabelService {
   public edit(editLabelRequest: CreateEditLabelRequest): Observable<void> {
     return this.http.put<void>(`${API_URL}/edit`, editLabelRequest);
   }
+
+  /**
+   * Deletes label by name for current user
+   *
+   * @param name of label
+   */
+  public delete(name: string): Observable<void> {
+    return this.http.delete<void>(`${API_URL}/delete/${name}`);
+  }
 }

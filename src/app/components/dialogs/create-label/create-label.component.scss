@@ -36,7 +36,58 @@
         }
       }
     }
-
-
   }
+}
+
+.labels {
+  padding: 5px;
+
+  .label__block {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 25px 1fr 25px;
+    align-content: center;
+    grid-template-rows: 50px;
+
+    .icon {
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 25px;
+      height: 25px;
+      cursor: pointer;
+      transition: .3s;
+
+      .hide__icon {
+        display: none;
+      }
+
+      .show__hidden_icon {
+        display: block;
+      }
+
+      &:hover {
+        background: rgba(95, 99, 104, 0.157);
+      }
+    }
+
+    .label {
+      margin-top: 5px;
+      margin-left: 0.5em;
+    }
+  }
+
+
+  .remove__underline {
+    .mat-form-field-underline {
+      display: none;
+    }
+  }
+
+}
+
+.mat-dialog-container {
+  padding: 10px;
+  border-radius: 3px;
 }

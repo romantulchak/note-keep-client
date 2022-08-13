@@ -14,7 +14,7 @@
       </div>
     </li>
     <li *ngFor="let label of labels">
-      <div class="link" role="button" routerLinkActive="{{label.name}}">
+      <div class="link" role="button" routerLink="/label/{{label.name}}" routerLinkActive="active">
         <img src="assets/icons/label.svg" alt="Label {{label.name}}">
         <h3 class="title">{{label.name}}</h3>
       </div>

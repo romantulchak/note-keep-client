@@ -12,4 +12,21 @@
       </div>
     </div>
   </form>
+  <ul class="labels">
+    <li *ngFor="let label of labels" class="label__block">
+      <div class="icon" (mouseenter)="showTrashIcon(label)" (mouseleave)="hideTrashIcon()">
+        <img src="assets/icons/label-filled.svg" alt="label-filed" *ngIf="this.currentLabelName !== label.name">
+        <img src="assets/icons/delete.svg" alt="trash" class="hide__icon"
+             [class.show__hidden_icon]="this.currentLabelName === label.name" (click)="removeLabel(label)">
+      </div>
+      <mat-form-field [class.remove__underline]="!label.isEdit" appearance="legacy" class="label">
+        <input matInput value="{{label.name}}" [readonly]="!label.isEdit" #labelInput>
+      </mat-form-field>
+      <div class="icon" (click)="enableEdit(label)">
+        <img src="assets/icons/edit-fill.svg" *ngIf="!label.isEdit" alt="Edit">
+        <img src="assets/icons/daw.svg" class="hide__icon" [class.show__hidden_icon]="label.isEdit" alt="Done"
+             (click)="edit(label, labelInput)">
+      </div>
+    </li>
+  </ul>
 </section>

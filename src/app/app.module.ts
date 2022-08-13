@@ -22,6 +22,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {CreateLabelComponent} from './components/dialogs/create-label/create-label.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import {MatInputModule} from '@angular/material/input';
     BrowserAnimationsModule,
     MatGridListModule,
     MatDialogModule,
-    MatInputModule
+    MatInputModule,
+    DragDropModule,
+    FlexLayoutModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

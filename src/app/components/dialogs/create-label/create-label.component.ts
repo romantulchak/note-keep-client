@@ -14,6 +14,7 @@ export class CreateLabelComponent implements OnInit {
 
   public labels: LabelDTO[];
   public labelFormGroup: FormGroup;
+  public currentLabelName: string;
 
   constructor(private labelService: LabelService,
               private formBuilder: FormBuilder) {
@@ -40,12 +41,68 @@ export class CreateLabelComponent implements OnInit {
   }
 
   /**
+   * Shows Trash icon on hover
+   *
+   * @param label to get current label name
+   */
+  public showTrashIcon(label: LabelDTO): void {
+    this.currentLabelName = label.name;
+  }
+
+  /**
+   * Reset component view to default
+   */
+  public hideTrashIcon(): void {
+    this.currentLabelName = '';
+  }
+
+  /**
+   * Remove label from account
+   *
+   * @param label to be removed
+   */
+  public removeLabel(label: LabelDTO) {
+    this.labelService.delete(label.name).subscribe(
+      () => {
+        this.labels = this.labels.filter(currentLabel => currentLabel.name !== label.name);
+      }
+    )
+  }
+
+  /**
+   * Change icon when user click on edit button
+   *
+   * @param label which will be edited
+   */
+  public enableEdit(label: LabelDTO): void {
+    label.isEdit = true;
+  }
+
+  /**
+   * Save result after editing and send it to server
+   *
+   * @param label which was edited
+   * @param newLabelName new label name
+   */
+  public edit(label: LabelDTO, newLabelName: HTMLInputElement): void {
+    const editLabelRequest = new CreateEditLabelRequest(newLabelName.value);
+    editLabelRequest.id = label.id;
+    this.labelService.edit(editLabelRequest).subscribe(
+      () => {
+        label.isEdit = false;
+        label.name = newLabelName.value;
+      }
+    )
+  }
+
+  /**
    * Gets labels for user
    */
   private getLabels(): void {
     this.labelService.getLabelsForUser().subscribe(
       res => {
         this.labels = res;
+        this.labels.forEach(value => value.isEdit = false);
       }
     )
   }

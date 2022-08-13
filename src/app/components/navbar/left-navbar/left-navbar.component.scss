@@ -27,6 +27,7 @@
 
   .link {
     @include linkAnimation(50px, 50px, 50px, 50px, .1s, .1s);
+    padding-left: 1em;
   }
 }
 
@@ -42,7 +43,6 @@
     align-items: center;
     gap: 1em;
     height: 48px;
-    padding-left: 1em;
     cursor: pointer;
 
     &:not(.active) {
