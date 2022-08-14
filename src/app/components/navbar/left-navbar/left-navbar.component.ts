@@ -23,6 +23,8 @@ export class LeftNavbarComponent implements OnInit {
   ngOnInit(): void {
     this.getNavbarStatus();
     this.getLabels();
+    this.subscribeNewLabels();
+    this.subscribeDeleteLabel();
   }
 
   /**
@@ -41,6 +43,32 @@ export class LeftNavbarComponent implements OnInit {
         this.labels = res;
       }
     )
+  }
+
+  /**
+   * Listen if user create new label if yes add it to left navbar
+   */
+  private subscribeNewLabels(): void {
+    this.labelService.newLabel.pipe().subscribe(
+      res => {
+        if (res != null) {
+          this.labels.push(res);
+        }
+      }
+    );
+  }
+
+  /**
+   * Listen if user delete label if yes also remove it from left navbar
+   */
+  private subscribeDeleteLabel(): void {
+    this.labelService.deleteLabel.pipe().subscribe(
+      res => {
+        if (res != null) {
+          this.labels = this.labels.filter(label => label.name !== res);
+        }
+      }
+    );
   }
 
   /**

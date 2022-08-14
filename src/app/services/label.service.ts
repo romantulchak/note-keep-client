@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {LabelDTO} from "../dto/label.dto";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
-import {Observable} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import {CreateEditLabelRequest} from "../request/create-edit-label.request";
 
 const API_URL = `${environment.apiUrl}/label`;
@@ -11,6 +11,9 @@ const API_URL = `${environment.apiUrl}/label`;
   providedIn: 'root'
 })
 export class LabelService {
+
+  public newLabel: Subject<LabelDTO> = new Subject<LabelDTO>();
+  public deleteLabel: Subject<string> = new Subject<string>();
 
   constructor(private http: HttpClient) {
   }

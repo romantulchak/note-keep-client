@@ -35,7 +35,8 @@ export class CreateLabelComponent implements OnInit {
       () => {
         const label = new LabelDTO(labelName);
         this.labels.unshift(label);
-        console.log('Created')
+        this.labelService.newLabel.next(label);
+        this.labelFormGroup.reset();
       }
     )
   }
@@ -65,6 +66,7 @@ export class CreateLabelComponent implements OnInit {
     this.labelService.delete(label.name).subscribe(
       () => {
         this.labels = this.labels.filter(currentLabel => currentLabel.name !== label.name);
+        this.labelService.deleteLabel.next(label.name);
       }
     )
   }
