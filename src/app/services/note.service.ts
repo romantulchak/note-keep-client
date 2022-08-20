@@ -28,6 +28,10 @@ export class NoteService {
     return this.http.get<NoteDTO[]>(API_URL, {params: params});
   }
 
+  public getNotesByLabelName(labelName: string, page: number = 0) {
+
+  }
+
   /**
    * Gets all backgrounds for note (colors and images)
    *
@@ -54,6 +58,15 @@ export class NoteService {
    */
   public changeBackground(changeNoteBackgroundRequest: ChangeNoteBackgroundRequest): Observable<void> {
     return this.http.put<void>(`${API_URL}/change-background`, changeNoteBackgroundRequest);
+  }
+
+  /**
+   * Adds note to archive
+   *
+   * @param noteId which will be added to archive
+   */
+  public addNoteToArchive(noteId: string): Observable<void> {
+    return this.http.put<void>(`${API_URL}/add-to-archive`, noteId);
   }
 
 }

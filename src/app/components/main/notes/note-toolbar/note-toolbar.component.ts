@@ -25,8 +25,10 @@ export class NoteToolbarComponent implements OnInit {
   @Input('showAdditionalActions') showAdditionalActions: boolean = true;
   @Input('selectedBackgroundImage') selectedBackgroundImage: String;
   @Input('selectedBackgroundColor') selectedBackgroundColor: String;
+  @Input('noteId') noteId: string | undefined = undefined;
   @Output('selectBackgroundImage') selectBackgroundImage: EventEmitter<NoteBackgroundDTO> = new EventEmitter();
   @Output('selectBackgroundColor') selectBackgroundColor: EventEmitter<NoteBackgroundDTO> = new EventEmitter();
+  @Output('addToArchive') addToArchiveEvent: EventEmitter<string> = new EventEmitter();
   private static backgrounds: BackgroundDTO;
 
   constructor(private noteService: NoteService,
@@ -51,6 +53,13 @@ export class NoteToolbarComponent implements OnInit {
     } else {
       this.createBackgroundPickerComponent();
     }
+  }
+
+  /**
+   * Emit Add to Archive event
+   */
+  public addToArchive(): void {
+    this.addToArchiveEvent.emit(this.noteId);
   }
 
   /**
@@ -86,7 +95,7 @@ export class NoteToolbarComponent implements OnInit {
    * Handle selected value from {@link NoteBackgroundPickerComponent}
    * and sets it into form group for backgroundImage field
    *
-   * @param componentRef to get @Output from compoennt
+   * @param componentRef to get @Output from component
    */
   private handleSelectedBackgroundImage(componentRef: ComponentRef<NoteBackgroundPickerComponent>): void {
     componentRef.instance.backgroundImage.subscribe(
@@ -100,7 +109,7 @@ export class NoteToolbarComponent implements OnInit {
    * Handle click outside background picker {@link NoteBackgroundPickerComponent}
    * if true then destroy component
    *
-   * @param componentRef to get @Output from compoennt
+   * @param componentRef to get @Output from component
    */
   private handleClickOutsideBackgroundPicker(componentRef: ComponentRef<NoteBackgroundPickerComponent>): void {
     componentRef.instance.hidePicker.subscribe(

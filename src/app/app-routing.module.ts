@@ -17,7 +17,9 @@ const routes: Routes = [
   {
     path: '', component: MainComponent, children: [
       {path: '', redirectTo: 'notes', pathMatch: 'full'},
-      {path: 'notes', component: NotesComponent}
+      {path: 'notes', component: NotesComponent, data: {type: 'ALL'}},
+      {path: 'label/:name', component: NotesComponent, data: {type: 'LABEL'}},
+      {path: 'archive', component: NotesComponent, data: {type: 'ARCHIVE'}}
     ]
   }
 ];

@@ -17,8 +17,10 @@
         <app-note-toolbar *ngIf="isOnFocus && currentFocusedNoteId === note.id" [showAdditionalActions]="false"
                           (selectBackgroundImage)="handleBackgroundImage($event, note)"
                           (selectBackgroundColor)="handleBackgroundColor($event, note)"
+                          (addToArchive)="handleAddToArchive($event)"
                           [selectedBackgroundColor]="note.backgroundColor.value"
                           [selectedBackgroundImage]="note.backgroundImage.name"
+                          [noteId]="note.id"
         ></app-note-toolbar>
       </div>
     </div>

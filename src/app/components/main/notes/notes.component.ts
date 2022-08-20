@@ -3,6 +3,7 @@ import {NoteBackgroundDTO} from 'src/app/dto/note-background.dto';
 import {NoteDTO} from 'src/app/dto/note.dto';
 import {NoteService} from "../../../services/note.service";
 import {ChangeNoteBackgroundRequest} from "../../../request/change-note-background.request";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-notes',
@@ -14,8 +15,12 @@ export class NotesComponent implements OnInit {
   public notes: NoteDTO[];
   public isOnFocus: boolean;
   public currentFocusedNoteId: string | undefined;
+  private type: 'ALL' | 'LABEL' | 'ARCHIVE' = 'ALL';
 
-  constructor(private noteService: NoteService) {
+  constructor(private noteService: NoteService,
+              private route: ActivatedRoute) {
+    console.log()
+    this.getRouteType();
   }
 
   ngOnInit(): void {
@@ -50,6 +55,19 @@ export class NotesComponent implements OnInit {
   }
 
   /**
+   * Adds note to archive
+   *
+   * @param noteId which will be added to archive
+   */
+  public handleAddToArchive(noteId: string): void {
+    this.noteService.addNoteToArchive(noteId).subscribe(
+      () => {
+        console.log('Added to archive');
+      }
+    )
+  }
+
+  /**
    * Set visibility to visible for hidden elements
    *
    * @param note to show hidden elements for current note
@@ -78,6 +96,10 @@ export class NotesComponent implements OnInit {
     )
   }
 
+  private getNotesByLabel(): void {
+    const labelName = this.route.snapshot.params.name;
+  }
+
   /**
    * Handle notes after creating and adds it to array
    */
@@ -101,5 +123,16 @@ export class NotesComponent implements OnInit {
       () => {
         console.log('Changed')
       });
+  }
+
+  /**
+   * Gets route type according to this value there will be
+   * different requests to the server
+   */
+  private getRouteType(): void {
+    const type = this.route.snapshot.data['type'];
+    if (type === 'ALL') {
+      this.type = 'ALL';
+    }
   }
 }

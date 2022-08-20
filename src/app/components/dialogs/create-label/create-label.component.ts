@@ -87,14 +87,19 @@ export class CreateLabelComponent implements OnInit {
    * @param newLabelName new label name
    */
   public edit(label: LabelDTO, newLabelName: HTMLInputElement): void {
-    const editLabelRequest = new CreateEditLabelRequest(newLabelName.value);
-    editLabelRequest.id = label.id;
-    this.labelService.edit(editLabelRequest).subscribe(
-      () => {
-        label.isEdit = false;
-        label.name = newLabelName.value;
-      }
-    )
+    if (label.name !== newLabelName.value) {
+      const editLabelRequest = new CreateEditLabelRequest(newLabelName.value);
+      editLabelRequest.id = label.id;
+      this.labelService.edit(editLabelRequest).subscribe(
+        () => {
+          label.name = newLabelName.value;
+          label.isEdit = false;
+        }
+      );
+    } else {
+      console.log(label)
+      label.isEdit = false;
+    }
   }
 
   /**
