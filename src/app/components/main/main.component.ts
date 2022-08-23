@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NavbarService} from "../../services/navbar.service";
+import {ActivatedRoute, ActivationStart, Router} from "@angular/router";
 
 @Component({
   selector: 'app-main',
@@ -9,12 +10,18 @@ import {NavbarService} from "../../services/navbar.service";
 export class MainComponent implements OnInit {
 
   public isNavbarOpened: boolean;
+  public isCreateNoteShow: boolean = true;
 
-  constructor(private navbarService: NavbarService) {
+  constructor(private navbarService: NavbarService,
+              private router: Router,
+              private route: ActivatedRoute) {
+
   }
 
   ngOnInit(): void {
     this.getNavbarStatus();
+    this.getRouteTypeOnInit();
+    this.getRouteTypeOnChange();
   }
 
   /**
@@ -26,6 +33,30 @@ export class MainComponent implements OnInit {
         this.isNavbarOpened = res;
       }
     );
+  }
+
+  /**
+   * Gets route type
+   */
+  private getRouteTypeOnChange(): void {
+    this.router.events.subscribe(event => {
+      if (event instanceof ActivationStart) {
+        debugger
+        let routeType = event.snapshot.data.type;
+        this.isCreateNoteShow = routeType !== 'ARCHIVE';
+      }
+    });
+  }
+
+  /**
+   * Gets route type on component init
+   */
+  private getRouteTypeOnInit(): void {
+    this.route.url.subscribe(() => {
+      if (this.route.snapshot.firstChild?.data.type === 'ARCHIVE') {
+        this.isCreateNoteShow = false;
+      }
+    });
   }
 
 }

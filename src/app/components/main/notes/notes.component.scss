@@ -14,6 +14,7 @@
     background-position-y: bottom;
     background-size: cover;
     min-height: 125px;
+    position: relative;
 
     .note__text_block {
       min-height: 60px;
@@ -30,6 +31,10 @@
         line-height: 1.5rem;
         min-height: 30px;
 
+        .clip__block {
+          top: 5px;
+          right: 5px;
+        }
       }
 
       .text {

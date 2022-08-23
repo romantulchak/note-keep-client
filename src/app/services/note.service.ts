@@ -28,8 +28,17 @@ export class NoteService {
     return this.http.get<NoteDTO[]>(API_URL, {params: params});
   }
 
-  public getNotesByLabelName(labelName: string, page: number = 0) {
+  /**
+   * Send request to server to get user archived notes
+   *
+   * @param page
+   */
+  public getArchivedNotes(page: number = 0): Observable<NoteDTO[]> {
+    const params = new HttpParams().append('page', page);
+    return this.http.get<NoteDTO[]>(`${API_URL}/archived`, {params: params})
+  }
 
+  public getNotesByLabelName(labelName: string, page: number = 0) {
   }
 
   /**

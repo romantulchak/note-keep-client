@@ -8,9 +8,14 @@
       <div class="note__text_block">
         <div class="title">
           <h4>{{note.title}}</h4>
+          <div class="text__util"></div>
+          <div class="clip__block" *ngIf="isOnFocus && currentFocusedNoteId === note.id">
+            <img *ngIf="!note.isMarked" src="assets/icons/clip.svg" alt="Clip">
+            <img *ngIf="note.isMarked" src="assets/icons/clip-filled.svg" alt="Clip">
+          </div>
         </div>
         <div class="text">
-          <h3>{{note.text}}</h3>
+          <h3>{{note.text | slice: 0: 12}}</h3>
         </div>
       </div>
       <div class="hidden__elements_block" [class.show__hidden_elements]="isOnFocus && currentFocusedNoteId === note.id">
@@ -20,7 +25,7 @@
                           (addToArchive)="handleAddToArchive($event)"
                           [selectedBackgroundColor]="note.backgroundColor.value"
                           [selectedBackgroundImage]="note.backgroundImage.name"
-                          [noteId]="note.id"
+                          [note]="note"
         ></app-note-toolbar>
       </div>
     </div>

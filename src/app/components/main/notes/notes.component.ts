@@ -15,17 +15,13 @@ export class NotesComponent implements OnInit {
   public notes: NoteDTO[];
   public isOnFocus: boolean;
   public currentFocusedNoteId: string | undefined;
-  private type: 'ALL' | 'LABEL' | 'ARCHIVE' = 'ALL';
 
   constructor(private noteService: NoteService,
               private route: ActivatedRoute) {
-    console.log()
-    this.getRouteType();
   }
 
   ngOnInit(): void {
-    this.getNotes();
-    this.getNotesAfterCreate();
+    this.getRouteType();
   }
 
   /**
@@ -62,6 +58,7 @@ export class NotesComponent implements OnInit {
   public handleAddToArchive(noteId: string): void {
     this.noteService.addNoteToArchive(noteId).subscribe(
       () => {
+        this.notes = this.notes.filter(note => note.id !== noteId);
         console.log('Added to archive');
       }
     )
@@ -88,12 +85,23 @@ export class NotesComponent implements OnInit {
   /**
    * Gets user notes
    */
-  private getNotes() {
+  private getNotes(): void {
     this.noteService.getNotes().subscribe(
       res => {
         this.notes = res;
       }
     )
+  }
+
+  /**
+   * Gets user archived notes
+   */
+  private getArchivedNotes(): void {
+    this.noteService.getArchivedNotes().subscribe(
+      res => {
+        this.notes = res;
+      }
+    );
   }
 
   private getNotesByLabel(): void {
@@ -132,7 +140,10 @@ export class NotesComponent implements OnInit {
   private getRouteType(): void {
     const type = this.route.snapshot.data['type'];
     if (type === 'ALL') {
-      this.type = 'ALL';
+      this.getNotes();
+      this.getNotesAfterCreate();
+    } else if (type === 'ARCHIVE') {
+      this.getArchivedNotes();
     }
   }
 }

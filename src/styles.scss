@@ -42,5 +42,24 @@ $note-keep-client-theme: mat.define-light-theme((
   margin: 0;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.text__util {
+  width: 32px;
+  height: 32px;
+  float: right;
+}
+
+.clip__block {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}

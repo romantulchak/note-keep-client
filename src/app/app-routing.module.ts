@@ -5,6 +5,7 @@ import {RegistrationComponent} from './components/auth/registration/registration
 import {AuthGuard} from "./guards/auth.guard";
 import {MainComponent} from "./components/main/main.component";
 import {NotesComponent} from "./components/main/notes/notes.component";
+import {UserLogoutGuard} from "./guards/user-logout.guard";
 
 const routes: Routes = [
   {
@@ -15,7 +16,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: '', component: MainComponent, children: [
+    path: '', component: MainComponent, canActivate: [UserLogoutGuard], children: [
       {path: '', redirectTo: 'notes', pathMatch: 'full'},
       {path: 'notes', component: NotesComponent, data: {type: 'ALL'}},
       {path: 'label/:name', component: NotesComponent, data: {type: 'LABEL'}},

@@ -7,7 +7,7 @@
       <app-left-navbar></app-left-navbar>
     </div>
     <div>
-      <div class="create__note_block"> 
+      <div class="create__note_block" *ngIf="isCreateNoteShow">
         <app-create-note></app-create-note>
       </div>
       <router-outlet></router-outlet>

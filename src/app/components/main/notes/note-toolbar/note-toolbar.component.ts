@@ -13,6 +13,7 @@ import {BackgroundDTO} from 'src/app/dto/backgorund.dto';
 import {NoteBackgroundDTO} from 'src/app/dto/note-background.dto';
 import {NoteService} from 'src/app/services/note.service';
 import {NoteBackgroundPickerComponent} from '../note-background-picker/note-background-picker.component';
+import {NoteDTO} from "../../../../dto/note.dto";
 
 @Component({
   selector: 'app-note-toolbar',
@@ -25,7 +26,7 @@ export class NoteToolbarComponent implements OnInit {
   @Input('showAdditionalActions') showAdditionalActions: boolean = true;
   @Input('selectedBackgroundImage') selectedBackgroundImage: String;
   @Input('selectedBackgroundColor') selectedBackgroundColor: String;
-  @Input('noteId') noteId: string | undefined = undefined;
+  @Input('note') note: NoteDTO | undefined = undefined;
   @Output('selectBackgroundImage') selectBackgroundImage: EventEmitter<NoteBackgroundDTO> = new EventEmitter();
   @Output('selectBackgroundColor') selectBackgroundColor: EventEmitter<NoteBackgroundDTO> = new EventEmitter();
   @Output('addToArchive') addToArchiveEvent: EventEmitter<string> = new EventEmitter();
@@ -59,7 +60,7 @@ export class NoteToolbarComponent implements OnInit {
    * Emit Add to Archive event
    */
   public addToArchive(): void {
-    this.addToArchiveEvent.emit(this.noteId);
+    this.addToArchiveEvent.emit(this.note?.id);
   }
 
   /**
