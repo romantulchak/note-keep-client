@@ -65,6 +65,19 @@ export class NotesComponent implements OnInit {
   }
 
   /**
+   * Removes note from archive
+   *
+   * @param noteId which will be added to archive
+   */
+  public handleRemoveFromArchive(noteId: string): void {
+    this.noteService.removeNoteFromArchive(noteId).subscribe(
+      res => {
+        this.notes = this.notes.filter(note => note.id !== noteId);
+      }
+    )
+  }
+
+  /**
    * Set visibility to visible for hidden elements
    *
    * @param note to show hidden elements for current note

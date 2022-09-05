@@ -15,7 +15,7 @@
     <div class="icon" (click)="addToArchive()" *ngIf="!note?.isArchived">
       <img src="assets/icons/archive.svg" title="Archive" alt="Archive">
     </div>
-    <div class="icon" *ngIf="note?.isArchived">
+    <div class="icon" (click)="removeNoteFromArchive()" *ngIf="note?.isArchived">
       <img src="assets/icons/unarchive.svg" title="Un-Archive" alt="Un-Archive">
     </div>
     <div class="icon">

@@ -41,7 +41,6 @@ export class MainComponent implements OnInit {
   private getRouteTypeOnChange(): void {
     this.router.events.subscribe(event => {
       if (event instanceof ActivationStart) {
-        debugger
         let routeType = event.snapshot.data.type;
         this.isCreateNoteShow = routeType !== 'ARCHIVE';
       }

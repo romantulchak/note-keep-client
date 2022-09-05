@@ -30,6 +30,7 @@ export class NoteToolbarComponent implements OnInit {
   @Output('selectBackgroundImage') selectBackgroundImage: EventEmitter<NoteBackgroundDTO> = new EventEmitter();
   @Output('selectBackgroundColor') selectBackgroundColor: EventEmitter<NoteBackgroundDTO> = new EventEmitter();
   @Output('addToArchive') addToArchiveEvent: EventEmitter<string> = new EventEmitter();
+  @Output('removeFromArchive') removeFromArchiveEvent: EventEmitter<string> = new EventEmitter();
   private static backgrounds: BackgroundDTO;
 
   constructor(private noteService: NoteService,
@@ -61,6 +62,13 @@ export class NoteToolbarComponent implements OnInit {
    */
   public addToArchive(): void {
     this.addToArchiveEvent.emit(this.note?.id);
+  }
+
+  /**
+   * Emit Remove from Archive event
+   */
+  public removeNoteFromArchive(): void {
+    this.removeFromArchiveEvent.emit(this.note?.id);
   }
 
   /**

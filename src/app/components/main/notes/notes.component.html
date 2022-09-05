@@ -23,6 +23,7 @@
                           (selectBackgroundImage)="handleBackgroundImage($event, note)"
                           (selectBackgroundColor)="handleBackgroundColor($event, note)"
                           (addToArchive)="handleAddToArchive($event)"
+                          (removeFromArchive)="handleRemoveFromArchive($event)"
                           [selectedBackgroundColor]="note.backgroundColor.value"
                           [selectedBackgroundImage]="note.backgroundImage.name"
                           [note]="note"

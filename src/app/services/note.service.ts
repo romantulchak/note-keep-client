@@ -78,4 +78,12 @@ export class NoteService {
     return this.http.put<void>(`${API_URL}/add-to-archive`, noteId);
   }
 
+  /**
+   * Removes note from archive
+   *
+   * @param noteId which will be added to archive
+   */
+  public removeNoteFromArchive(noteId: string): Observable<void> {
+    return this.http.put<void>(`${API_URL}/remove-from-archive`, noteId);
+  }
 }
