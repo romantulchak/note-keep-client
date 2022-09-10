@@ -1,8 +1,9 @@
-import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {NoteBackgroundDTO} from 'src/app/dto/note-background.dto';
 import {NoteService} from 'src/app/services/note.service';
 import {NoteBackgroundPickerComponent} from '../note-background-picker/note-background-picker.component';
+import {NoteDTO} from "../../../../dto/note.dto";
 
 @Component({
   selector: 'app-create-note',
@@ -11,7 +12,8 @@ import {NoteBackgroundPickerComponent} from '../note-background-picker/note-back
 })
 export class CreateNoteComponent implements OnInit {
 
-  public isNoteCreatingFocus: boolean;
+  @Input('note') note: NoteDTO;
+  @Input('isFormInFocus') isNoteCreatingFocus: boolean;
   public createNoteFormGroup: FormGroup;
   public selectedBackgroundColor: NoteBackgroundDTO | null;
   public selectedBackgroundImage: NoteBackgroundDTO | null;
@@ -111,11 +113,11 @@ export class CreateNoteComponent implements OnInit {
    */
   private initNoteFormGroup(): void {
     this.createNoteFormGroup = this.fb.group({
-      title: ['', Validators.maxLength(999)],
-      text: ['', [Validators.required, Validators.minLength(0), Validators.maxLength(7800)]],
-      isMarked: [false],
-      backgroundColor: [''],
-      backgroundImage: [''],
+      title: [this.note?.title || '', Validators.maxLength(999)],
+      text: [this.note?.text || '', [Validators.required, Validators.minLength(0), Validators.maxLength(7800)]],
+      isMarked: [this.note.isMarked || false],
+      backgroundColor: [this.note?.backgroundColor.value || ''],
+      backgroundImage: [this.note?.backgroundImage.value || ''],
     });
   }
 }

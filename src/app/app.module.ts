@@ -24,6 +24,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {FlexLayoutModule} from "@angular/flex-layout";
+import {NoteCardComponent} from './components/main/notes/note-card/note-card.component';
+import {NoteDetailsDialogComponent} from './components/main/notes/note-details-dialog/note-details-dialog.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import {FlexLayoutModule} from "@angular/flex-layout";
     NoteBackgroundPickerComponent,
     NoteToolbarComponent,
     CreateLabelComponent,
+    NoteCardComponent,
+    NoteDetailsDialogComponent,
   ],
   imports: [
     BrowserModule,

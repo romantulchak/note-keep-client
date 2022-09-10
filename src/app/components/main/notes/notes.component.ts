@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {NoteBackgroundDTO} from 'src/app/dto/note-background.dto';
 import {NoteDTO} from 'src/app/dto/note.dto';
 import {NoteService} from "../../../services/note.service";
-import {ChangeNoteBackgroundRequest} from "../../../request/change-note-background.request";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
@@ -13,8 +11,6 @@ import {ActivatedRoute} from "@angular/router";
 export class NotesComponent implements OnInit {
 
   public notes: NoteDTO[];
-  public isOnFocus: boolean;
-  public currentFocusedNoteId: string | undefined;
 
   constructor(private noteService: NoteService,
               private route: ActivatedRoute) {
@@ -25,74 +21,12 @@ export class NotesComponent implements OnInit {
   }
 
   /**
-   * Handle selected value from {@link NoteBackgroundPickerComponent}
-   * and sets it for Note backgroundImage field
-   *
-   * @param noteBackgroundDTO to get @Output from component
-   * @param note for which background will be set
-   */
-  public handleBackgroundImage(noteBackgroundDTO: NoteBackgroundDTO, note: NoteDTO): void {
-    note.backgroundImage.fullPathToImage = noteBackgroundDTO.fullPathToImage;
-    const changeNoteBackgroundRequest = new ChangeNoteBackgroundRequest(note.id, noteBackgroundDTO.name, 'IMAGE');
-    this.changeBackground(changeNoteBackgroundRequest);
-  }
-
-  /**
-   * Handle selected value from {@link NoteBackgroundPickerComponent}
-   * and sets it for Note backgroundColor field
-   *
-   * @param noteBackgroundDTO to get @Output from component
-   * @param note for which background will be set
-   */
-  public handleBackgroundColor(noteBackgroundDTO: NoteBackgroundDTO, note: NoteDTO): void {
-    note.backgroundColor.value = noteBackgroundDTO.value;
-    const changeNoteBackgroundRequest = new ChangeNoteBackgroundRequest(note.id, noteBackgroundDTO.name, 'COLOR');
-    this.changeBackground(changeNoteBackgroundRequest);
-  }
-
-  /**
-   * Adds note to archive
+   * Filter notes after add or remove note to/from archive
    *
    * @param noteId which will be added to archive
    */
-  public handleAddToArchive(noteId: string): void {
-    this.noteService.addNoteToArchive(noteId).subscribe(
-      () => {
-        this.notes = this.notes.filter(note => note.id !== noteId);
-        console.log('Added to archive');
-      }
-    )
-  }
-
-  /**
-   * Removes note from archive
-   *
-   * @param noteId which will be added to archive
-   */
-  public handleRemoveFromArchive(noteId: string): void {
-    this.noteService.removeNoteFromArchive(noteId).subscribe(
-      res => {
-        this.notes = this.notes.filter(note => note.id !== noteId);
-      }
-    )
-  }
-
-  /**
-   * Set visibility to visible for hidden elements
-   *
-   * @param note to show hidden elements for current note
-   */
-  public showHiddenElements(note: NoteDTO): void {
-    this.isOnFocus = true;
-    this.currentFocusedNoteId = note.id;
-  }
-
-  /**
-   * Hides additional elements
-   */
-  public hideElements(): void {
-    this.isOnFocus = false;
-    this.currentFocusedNoteId = undefined;
+  public filterNotesByArchived(noteId: string): void {
+    this.notes = this.notes.filter(note => note.id !== noteId);
   }
 
   /**
@@ -117,10 +51,6 @@ export class NotesComponent implements OnInit {
     );
   }
 
-  private getNotesByLabel(): void {
-    const labelName = this.route.snapshot.params.name;
-  }
-
   /**
    * Handle notes after creating and adds it to array
    */
@@ -132,18 +62,6 @@ export class NotesComponent implements OnInit {
         }
       }
     );
-  }
-
-  /**
-   * Sends request to server to change note background
-   *
-   * @param changeNoteBackgroundRequest contains info about note and background
-   */
-  private changeBackground(changeNoteBackgroundRequest: ChangeNoteBackgroundRequest): void {
-    this.noteService.changeBackground(changeNoteBackgroundRequest).subscribe(
-      () => {
-        console.log('Changed')
-      });
   }
 
   /**

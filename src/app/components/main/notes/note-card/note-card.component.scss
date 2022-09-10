@@ -1,0 +1,58 @@
+.note {
+  width: 240px;
+  height: max-content;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-sizing: border-box;
+  display: inline-block;
+  background-position-x: right;
+  background-position-y: bottom;
+  background-size: cover;
+  min-height: 125px;
+  position: relative;
+  transition: .2s ease-in;
+
+  .note__text_block {
+    min-height: 60px;
+    font-family: "Open Sans", sans-serif;
+    padding: 4px 16px 12px 16px;
+    background-position-x: right;
+    background-position-y: bottom;
+    background-size: cover;
+
+    .title {
+      padding-top: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.5rem;
+      min-height: 30px;
+
+      .clip__block {
+        top: 5px;
+        right: 5px;
+      }
+    }
+
+    .text {
+      font-size: 15.5px;
+      font-weight: 400;
+      letter-spacing: 0;
+      line-height: 1.5rem;
+    }
+  }
+}
+
+.hidden__elements_block {
+  opacity: 0;
+  transition: .3s ease-in-out;
+  box-sizing: border-box;
+  padding: 0.2em;
+}
+
+.show__hidden_elements {
+  opacity: 1;
+}
+
+.hide__on_click {
+  opacity: 0;
+}
