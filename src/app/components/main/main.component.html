@@ -8,7 +8,7 @@
     </div>
     <div>
       <div class="create__note_block" *ngIf="isCreateNoteShow">
-        <app-create-note></app-create-note>
+        <app-create-note (create)="createNote($event)"></app-create-note>
       </div>
       <router-outlet></router-outlet>
     </div>

@@ -1,19 +1,32 @@
-import {Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {NoteBackgroundDTO} from 'src/app/dto/note-background.dto';
-import {NoteService} from 'src/app/services/note.service';
 import {NoteBackgroundPickerComponent} from '../note-background-picker/note-background-picker.component';
 import {NoteDTO} from "../../../../dto/note.dto";
+import {CreateNoteRequest} from "../../../../request/create-note.request";
 
 @Component({
   selector: 'app-create-note',
   templateUrl: './create-note.component.html',
   styleUrls: ['./create-note.component.scss']
 })
-export class CreateNoteComponent implements OnInit {
+export class CreateNoteComponent implements OnInit, AfterViewInit {
 
   @Input('note') note: NoteDTO;
-  @Input('isFormInFocus') isNoteCreatingFocus: boolean;
+  @Input('isSkipFocus') skipFocus: boolean = true;
+  @Input('isEdit') isEdit: boolean;
+  @Input('isNoteCreatingFocus') isNoteCreatingFocus: boolean;
+  @Output('create') createNoteEvent: EventEmitter<CreateNoteRequest> = new EventEmitter<CreateNoteRequest>();
   public createNoteFormGroup: FormGroup;
   public selectedBackgroundColor: NoteBackgroundDTO | null;
   public selectedBackgroundImage: NoteBackgroundDTO | null;
@@ -22,12 +35,17 @@ export class CreateNoteComponent implements OnInit {
   @ViewChild('titlebox') titleBox: ElementRef;
 
   constructor(private elementRef: ElementRef,
-              private fb: FormBuilder,
-              private noteService: NoteService) {
+              private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
     this.initNoteFormGroup();
+  }
+
+  ngAfterViewInit(): void {
+    if (this.isEdit) {
+      this.handleEditNote();
+    }
   }
 
   /**
@@ -61,7 +79,7 @@ export class CreateNoteComponent implements OnInit {
    */
   @HostListener('document:mousedown', ['$event'])
   public onClickOutsideCreateNote(event: MouseEvent): void {
-    if (!this.elementRef.nativeElement.contains(event.target) && this.isNoteCreatingFocus) {
+    if (!this.elementRef.nativeElement.contains(event.target) && this.isNoteCreatingFocus && this.skipFocus) {
       this.isNoteCreatingFocus = false;
       window.getSelection()?.removeAllRanges();
       this.createNote();
@@ -91,15 +109,11 @@ export class CreateNoteComponent implements OnInit {
   }
 
   /**
-   * Sends request to server to create note
+   * Sends event to parent to create note
    */
   private createNote(): void {
     if (this.createNoteFormGroup.valid) {
-      this.noteService.create(this.createNoteFormGroup.value).subscribe(
-        res => {
-          this.noteService.notes.next(res);
-        }
-      );
+      this.createNoteEvent.emit(this.createNoteFormGroup.value);
     }
     this.textBox.nativeElement.innerHTML = ''
     this.titleBox.nativeElement.innerHTML = '';
@@ -115,9 +129,37 @@ export class CreateNoteComponent implements OnInit {
     this.createNoteFormGroup = this.fb.group({
       title: [this.note?.title || '', Validators.maxLength(999)],
       text: [this.note?.text || '', [Validators.required, Validators.minLength(0), Validators.maxLength(7800)]],
-      isMarked: [this.note.isMarked || false],
+      isMarked: [this.note?.isMarked || false],
       backgroundColor: [this.note?.backgroundColor.value || ''],
       backgroundImage: [this.note?.backgroundImage.value || ''],
     });
+  }
+
+  private handleEditNote(): void {
+    this.titleBox.nativeElement.innerHTML = this.title;
+    this.textBox.nativeElement.innerHTML = this.text;
+    this.selectedBackgroundColor = new NoteBackgroundDTO('', this.backgroundColor, this.backgroundColor);
+    this.selectedBackgroundImage = new NoteBackgroundDTO('', this.backgroundImage, this.backgroundImage);
+
+  }
+
+  get title(): string {
+    return this.createNoteFormGroup.get('title')?.value;
+  }
+
+  get text(): string {
+    return this.createNoteFormGroup.get('text')?.value;
+  }
+
+  get isMarked(): string {
+    return this.createNoteFormGroup.get('isMarked')?.value;
+  }
+
+  get backgroundColor(): string {
+    return this.createNoteFormGroup.get('backgroundColor')?.value;
+  }
+
+  get backgroundImage(): string {
+    return this.createNoteFormGroup.get('backgroundImage')?.value;
   }
 }

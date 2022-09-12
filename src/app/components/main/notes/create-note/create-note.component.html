@@ -3,7 +3,7 @@
     <div class="title__text_panel" [style.background-image]="'url(' + selectedBackgroundImage?.fullPathToImage + ')'">
       <div *ngIf="isNoteCreatingFocus" class="title__block" role="textbox">
         <div class="text__util"></div>
-        <div class="text__input" #titlebox contenteditable="true" (focus)="setNoteCreationOnFocus()"
+        <div class="text__input" #titlebox contenteditable="true" (focus)="skipFocus && setNoteCreationOnFocus()"
              (input)="setTextForNote($event, 'title')" placeholder="Title"></div>
         <div class="clip__block" (click)="setMarked()">
           <img *ngIf="!createNoteFormGroup.get('isMarked')?.value" src="assets/icons/clip.svg" alt="Clip">

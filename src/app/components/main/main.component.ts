@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {NavbarService} from "../../services/navbar.service";
 import {ActivatedRoute, ActivationStart, Router} from "@angular/router";
+import {NoteService} from "../../services/note.service";
+import {CreateNoteRequest} from "../../request/create-note.request";
 
 @Component({
   selector: 'app-main',
@@ -14,7 +16,8 @@ export class MainComponent implements OnInit {
 
   constructor(private navbarService: NavbarService,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private noteService: NoteService) {
 
   }
 
@@ -22,6 +25,17 @@ export class MainComponent implements OnInit {
     this.getNavbarStatus();
     this.getRouteTypeOnInit();
     this.getRouteTypeOnChange();
+  }
+
+  /**
+   * Sends request to server to create note
+   */
+  public createNote(createNoteRequest: CreateNoteRequest): void {
+    this.noteService.create(createNoteRequest).subscribe(
+      res => {
+        this.noteService.notes.next(res);
+      }
+    );
   }
 
   /**
