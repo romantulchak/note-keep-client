@@ -114,6 +114,20 @@ export class NoteCardComponent implements OnInit {
   }
 
   /**
+   * Sets marked flag for note
+   *
+   * @param event to stop propagation
+   */
+  public markNote(event: MouseEvent) {
+    event.stopPropagation();
+    this.noteService.setMarked(this.note.id).subscribe(
+      () => {
+        this.note.isMarked = !this.note.isMarked;
+      }
+    )
+  }
+
+  /**
    * Sends request to server to change note background
    *
    * @param changeNoteBackgroundRequest contains info about note and background

@@ -86,4 +86,11 @@ export class NoteService {
   public removeNoteFromArchive(noteId: string): Observable<void> {
     return this.http.put<void>(`${API_URL}/remove-from-archive`, noteId);
   }
+
+  /**
+   * Sets marked flag for note
+   */
+  public setMarked(noteId: string): Observable<void> {
+    return this.http.put<void>(`${API_URL}/set-marked`, noteId);
+  }
 }

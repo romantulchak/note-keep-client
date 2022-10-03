@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -35,7 +36,8 @@ export class CreateNoteComponent implements OnInit, AfterViewInit {
   @ViewChild('titlebox') titleBox: ElementRef;
 
   constructor(private elementRef: ElementRef,
-              private fb: FormBuilder) {
+              private fb: FormBuilder,
+              private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
@@ -140,7 +142,7 @@ export class CreateNoteComponent implements OnInit, AfterViewInit {
     this.textBox.nativeElement.innerHTML = this.text;
     this.selectedBackgroundColor = new NoteBackgroundDTO('', this.backgroundColor, this.backgroundColor);
     this.selectedBackgroundImage = new NoteBackgroundDTO('', this.backgroundImage, this.backgroundImage);
-
+    this.cdr.detectChanges();
   }
 
   get title(): string {

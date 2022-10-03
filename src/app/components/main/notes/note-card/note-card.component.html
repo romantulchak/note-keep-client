@@ -7,7 +7,7 @@
     <div class="title">
       <h4>{{note.title}}</h4>
       <div class="text__util"></div>
-      <div class="clip__block" *ngIf="isOnFocus && currentFocusedNoteId === note.id">
+      <div class="clip__block" (click)="markNote($event)" *ngIf="isOnFocus && currentFocusedNoteId === note.id">
         <img *ngIf="!note.isMarked" src="assets/icons/clip.svg" alt="Clip">
         <img *ngIf="note.isMarked" src="assets/icons/clip-filled.svg" alt="Clip">
       </div>
